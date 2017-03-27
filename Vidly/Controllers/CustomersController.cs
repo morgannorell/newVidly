@@ -18,21 +18,15 @@ namespace Vidly.Controllers
             return View(customers);
         }
 
+        // Return one customer
         public ActionResult Details(int id)
         {
-            var customers = CustomerList();
-            var customer = new Customer();
+            var customer = CustomerList().SingleOrDefault(c => c.Id == id);
 
-            foreach(var item in customers)
-            {
-                if (item.Id == id)
-                {
-                    customer = item;
-                    return View(customer);
-                }                    
-            }
+            if (customer == null)
+                return HttpNotFound();
 
-            return HttpNotFound();
+            return View(customer); 
         }
 
         // List of Customers

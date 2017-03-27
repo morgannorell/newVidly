@@ -16,6 +16,22 @@ namespace Vidly.Controllers
 
             return View(movies);
         }
+        
+        private IEnumerable<Movie> movieList()
+        {
+            return new List<Movie>
+            {
+                new Movie { Id = 1, Name = "Shrek" },
+                new Movie { Id = 2, Name = "Die Hard 3" },
+                new Movie { Id = 3, Name = "Hangover" }
+            };
+        }
+
+        public ActionResult Edit(int id)
+        {
+            return Content("id=" + id);
+        }
+
         // GET: Movies/Random
         public ActionResult Random()
         {
@@ -44,11 +60,6 @@ namespace Vidly.Controllers
             //return RedirectToAction("Index", "Home", new { page = 1, sortBy = "name" });
         }
 
-        public ActionResult Edit(int id)
-        {
-            return Content("id=" + id);
-        }
-
         //public ActionResult Index(int? pageIndex, string sortBy)
         //{
         //    if (!pageIndex.HasValue)
@@ -64,16 +75,6 @@ namespace Vidly.Controllers
         public ActionResult ByReleaseDate(int year, int month)
         {
             return Content(year + "/" + month);
-        }
-
-        private IEnumerable<Movie> movieList()
-        {
-            return new List<Movie>
-            {
-                new Movie { Id = 1, Name = "Shrek" },
-                new Movie { Id = 2, Name = "Die Hard 3" },
-                new Movie { Id = 3, Name = "Hangover" }
-            };
         }
     }
 }
