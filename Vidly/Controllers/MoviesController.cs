@@ -46,6 +46,9 @@ namespace Vidly.Controllers
         {
             var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
 
+            if (movie == null)
+                return HttpNotFound();
+
             var viewModel = new MovieFormViewModel()
             {
                 Movie = movie,
@@ -55,6 +58,7 @@ namespace Vidly.Controllers
             return View("MovieForm", viewModel);
         }
 
+        [HttpPost]
         public ActionResult Save(Movie movie)
         {
             if (movie.Id == 0)
