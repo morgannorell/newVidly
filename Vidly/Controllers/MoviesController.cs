@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Vidly.Models;
 using Vidly.ViewModels;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 
 namespace Vidly.Controllers
 {
@@ -26,7 +27,6 @@ namespace Vidly.Controllers
         public ActionResult Index()
         {
             var movies = _context.Movies.Include(c => c.Genre).ToList();
-            //var movies = movieList();
 
             return View(movies);
         }
@@ -59,20 +59,24 @@ namespace Vidly.Controllers
         public ActionResult Save(Movie movie)
         {
             if (movie.Id == 0)
+            {
+                movie.DateAdded = DateTime.Now;
                 _context.Movies.Add(movie);
+            }                
             else
             {
                 var movieInDb = _context.Movies.Single(m => m.Id == movie.Id);
 
                 movieInDb.Name = movie.Name;
-                movieInDb.Genre = movie.Genre;
+                movieInDb.GenreId = movie.GenreId;
                 movieInDb.DateAdded = movie.DateAdded;
                 movieInDb.ReleaseDate = movie.ReleaseDate;
                 movieInDb.NumberInStock = movie.NumberInStock;
             }
-            _context.SaveChanges();
 
-            return View("Index", "Movies");
+            _context.SaveChanges();
+            
+            return RedirectToAction("Index", "Movies");
         }
 
         //public ActionResult Details(int id)
