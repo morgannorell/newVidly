@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using Vidly.Models;
 using Vidly.ViewModels;
 using System.Data.Entity;
-using System.Data.Entity.Validation;
 
 namespace Vidly.Controllers
 {
@@ -35,25 +34,25 @@ namespace Vidly.Controllers
         {
             var genres = _context.Genres.ToList();
 
-            var viewModel = new MoviesFormViewModel()
+            var viewModel = new MovieFormViewModel()
             {
                 Genres = genres
             };
 
-            return View("MoviesForm", viewModel);
+            return View("MovieForm", viewModel);
         }
 
         public ActionResult Edit(int id)
         {
             var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
 
-            var viewModel = new MoviesFormViewModel()
+            var viewModel = new MovieFormViewModel()
             {
                 Movie = movie,
                 Genres = _context.Genres.ToList()
             };
 
-            return View("MoviesForm", viewModel);
+            return View("MovieForm", viewModel);
         }
 
         public ActionResult Save(Movie movie)
