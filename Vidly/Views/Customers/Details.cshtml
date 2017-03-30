@@ -12,6 +12,13 @@
 else
 {
     <h2>@Model.Name</h2>
+    <ul>
+        <li>@Html.DisplayNameFor(m => m.MembershipType): @Model.MembershipType.Name</li>
+        @if (Model.Birthdate.HasValue)
+        {
+            <li>@Html.DisplayNameFor(m => m.Birthdate): @Model.Birthdate.Value.ToShortDateString()</li>
+        }
+    </ul>
 }
 
 
