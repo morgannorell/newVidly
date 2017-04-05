@@ -18,8 +18,13 @@
         </footer>
     </div>
 
+    @* lib replace jquery and bootstrap bundles
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    *@
+
+    @Scripts.Render("~/bundles/lib")
     @RenderSection("scripts", required: false)
 </body>
 </html>
