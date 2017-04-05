@@ -8,6 +8,7 @@ namespace Vidly.Models
 {
     public class Min18YearsIfAMember : ValidationAttribute
     {
+        // Need to be change in use with API
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var customer = (Customer)validationContext.ObjectInstance;
